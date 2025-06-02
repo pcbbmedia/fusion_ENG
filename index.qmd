@@ -93,7 +93,7 @@ viewof chart = Plot.plot({
 
 ::::{.cr-section}
 
-Market Share Distribution in Argentina (Pre-Acquisition)  <br><br>Flow (Telecom) and Movistar (Telefónica) are two of the main players in the market.  @cr-market-plot-highlighted
+<span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Market Share Distribution in Argentina (Pre-Acquisition) <br><br></span> Flow (Telecom) and Movistar (Telefónica) are two of the main players in the market.  @cr-market-plot-highlighted
 
 :::{#cr-market-plot-highlighted}
 ```{ojs}
@@ -779,7 +779,7 @@ viewof chart_flow_post = Plot.plot({
   height: 700,
   width: 850,
   y: {
-    label: "Market Share Post Fusión (%)",
+    label: "Market Share Post-Merger (%)",
     grid: true
   },
   x: {
@@ -805,14 +805,15 @@ viewof chart_flow_post = Plot.plot({
 ```
 :::
 
-[@cr-mapa-post-fusion]{scale-by="7.8"} Market Reconfiguration After the Merger <br><br> After acquiring Movistar, Flow would become the <span style="color:#FFAC26">**MARKET LEADER**</span> in 17 provinces and achieve nationwide coverage. 
+[@cr-mapa-post-fusion]{scale-by="7.8"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Market Reconfiguration After the Merger <br><br></span> After acquiring Movistar, Flow would become the <span style="color:#FFAC26">**MARKET LEADER**</span> in 17 provinces and achieve nationwide coverage. 
  
 [@cr-barras-agrupadas]{scale-by="0.9"} In key regions where both brands operated, Flow's market share would grow significantly:   
 
 
 [@cr-barras-comparacion]{scale-by="0.9"} In key regions where both brands operated, Flow's market share would grow significantly: 
 
-[@cr-barras-flow-post]{scale-by="0.9"} Post-Merger Market Share by Province: <br><br>• Río Negro (54.8%)<br><br>• CABA (53.9%)<br><br>• Neuquén (46.7%)<br><br>• San Juan (51.2%)
+
+[@cr-barras-flow-post]{scale-by="0.9"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Post-Merger Market Share by Province: <br><br></span>• Río Negro (54.8%)<br><br>• CABA (53.9%)<br><br>• Neuquén (46.7%)<br><br>• San Juan (51.2%)
 
 ::::
 
@@ -836,7 +837,7 @@ nacional_processed = nacional_data
   .sort((a, b) => b.Share - a.Share);
 
 viewof chart_nacional = Plot.plot({
-  title: "Market Share Nacional Pre Fusión",
+  title: "National Market Share Pre-Merger",
   marginLeft: 150,
   marginRight: 50,
   height: 700,
@@ -895,7 +896,7 @@ nacional_processed_post = nacional_data_post
   .sort((a, b) => b.Share - a.Share);
 
 viewof chart_nacional_post = Plot.plot({
-  title: "Market Share Nacional Post Fusión",
+  title: "National Market Share Post-Merger",
   marginLeft: 150,
   marginRight: 50,
   height: 700,
@@ -930,7 +931,7 @@ viewof chart_nacional_post = Plot.plot({
 ```
 :::
 
-[@cr-nacional-share-post]{scale-by="0.9"} After the merger: <br><br> Flow would command 47.5% of the national market, becoming the undisputed leader. The next closest competitor, Claro, remains at 15.1%. 
+[@cr-nacional-share-post]{scale-by="0.9"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">After the merger: <br><br></span> Flow would command 47.5% of the national market, becoming the undisputed leader. The next closest competitor, Claro, remains at 15.1%. 
 
 ::::
 
@@ -1067,7 +1068,7 @@ Plot.plot({
   height: 400,
   y: {
     grid: true,
-    label: "Costo por MB ($)",
+    label: "Average Cost per MB",
     domain: [0, 250]
   },
   x: {
