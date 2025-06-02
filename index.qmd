@@ -24,7 +24,7 @@ execute:
  ![](FABRICLOGO.png){.scale-to-fill}
 :::
 
-@cr-headline2 <span style="font-size: 48pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET REPORT<br></span> <span style="font-size: 24pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">La fusión de Telecom y Telefónica</span> 
+@cr-headline2 <span style="font-size: 48pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET REPORT<br></span> <span style="font-size: 24pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">The Merger of Telecom and Telefónica</span> 
 
 ::::
 
@@ -34,10 +34,10 @@ execute:
  ![](logo_fusionado2.png){.scale-to-fill}
 :::
 
-@cr-headline <span style="font-size: 38pt; font-weight: bold; text-align: center; color: #FFFFFF; ">¿Cómo impacta al mercado de Internet?</span> 
+@cr-headline <span style="font-size: 38pt; font-weight: bold; text-align: center; color: #FFFFFF; ">How does it impact the Internet market?</span> 
 
 
-@cr-headline La empresa del Grupo Clarín invirtió US$ 1.245 millones para quedarse con Telefónica Argentina. <br><br> La operación marca un hito histórico en el mercado argentino de telecomunicaciones. 
+@cr-headline The Clarín Group company has invested US$1.2 billion to acquire Telefónica Argentina.  <br><br> This transaction marks a historic milestone in the Argentine telecommunications market. 
 
 :::{#cr-market-plot}
 ```{ojs}
@@ -93,7 +93,7 @@ viewof chart = Plot.plot({
 
 ::::{.cr-section}
 
-Así se distribuye el Market Share en Argentina previo a la adquisición. <br><br>Flow (Telecom) y Movistar (Telefónica) son dos de los principales players dentro del mercado. @cr-market-plot-highlighted
+Market Share Distribution in Argentina (Pre-Acquisition)  <br><br>Flow (Telecom) and Movistar (Telefónica) are two of the main players in the market.  @cr-market-plot-highlighted
 
 :::{#cr-market-plot-highlighted}
 ```{ojs}
@@ -329,9 +329,9 @@ Plot.plot({
 ```
 :::
 
-[@cr-mapa-activo]{scale-by="7.4"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Cómo es la presencia de Movistar en el mercado? <br><br></span>Según el relevamiento de Fabric, Movistar tiene cobertura en 14 provincias.
+[@cr-mapa-activo]{scale-by="7.4"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Movistar’s Market Presence  <br><br></span>According to Fabric’s research, Movistar operates in 14 provinces. 
 
-[@cr-mapa-concentracion]{scale-by="16.8"} El 81% de sus abonados se concentran en CABA, Buenos Aires y Mendoza.
+[@cr-mapa-concentracion]{scale-by="16.8"} 81% of its subscribers are concentrated in Buenos Aires (Province and City) and Mendoza. 
 
 ::::
 
@@ -385,9 +385,9 @@ Plot.plot({
 ```
 :::
 
-[@cr-mapa-patagonia]{scale-by="7.4"} Mientras que las provincias donde Movistar tiene una posición más dominante en el market share se encuentran en la región patagónica.
+[@cr-mapa-patagonia]{scale-by="7.4"} Movistar holds its strongest market share in Patagonia, especially in: 
 
-[@cr-mapa-patagonia]{pan-to="0%,-45%" scale-by="16.4"} Estas son Río Negro (45.6%), Chubut (43.6%), Tierra del Fuego (37.2%) y Neuquén (36.2%).
+[@cr-mapa-patagonia]{pan-to="0%,-45%" scale-by="16.4"} • Río Negro (45.6%)<br><br>• Chubut (43.6%)<br><br>• Tierra del Fuego (37.2%)<br><br>• Neuquén (36.2%).
 
 :::{#cr-barras-share}
 ```{ojs}
@@ -441,7 +441,7 @@ viewof chart_share = Plot.plot({
 ```
 :::
 
-@cr-barras-share En estas provincias del sur, Movistar alcanza sus mayores niveles de participación de mercado, llegando al 45.6% en Río Negro y 43.6% en Chubut.
+@cr-barras-share In these southern provinces, Movistar reaches its highest market share levels, reaching 45.6% in Río Negro and 43.6% in Chubut.
 
 ::::
 
@@ -579,11 +579,11 @@ Plot.plot({
 ```
 :::
 
-[@cr-logoflow]{scale-by="0.7"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Cómo quedaría reconfigurada la presencia de Flow en el mercado?<br><br></span>Actualmente Flow es el líder en el mercado de Internet en Argentina con 3.9 millones de abonados y 34.68% de Market Share.
+[@cr-logoflow]{scale-by="0.7"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Flow’s Current Market Footprint <br><br></span>Flow leads Argentina's internet market with 3.9 million subscribers and 34.68% market share. 
 
-[@cr-mapa-flow]{scale-by="7.4"} Tiene presencia en 23 provincias.
+[@cr-mapa-flow]{scale-by="7.4"} It operates in 23 provinces.
 
-[@cr-mapa-fusion]{scale-by="7.4"} Hoy en día Flow es <span style="color:#FFAC26">**LÍDER DE MERCADO**</span> en 13 de esas provincias.
+[@cr-mapa-fusion]{scale-by="7.4"} It is <span style="color:#FFAC26">**MARKET LEADER**</span> in 13 of them.
 
 ::::
 
@@ -805,14 +805,14 @@ viewof chart_flow_post = Plot.plot({
 ```
 :::
 
-[@cr-mapa-post-fusion]{scale-by="7.8"} Tras la fusión, Flow pasaría a ser <span style="color:#FFAC26">**LÍDER DE MERCADO**</span> en 17 de esas provincias y tendría cobertura en todas las provincias del país.
+[@cr-mapa-post-fusion]{scale-by="7.8"} Market Reconfiguration After the Merger <br><br> After acquiring Movistar, Flow would become the <span style="color:#FFAC26">**MARKET LEADER**</span> in 17 provinces and achieve nationwide coverage. 
  
-[@cr-barras-agrupadas]{scale-by="0.9"} Veamos en detalle el impacto de la fusión en el Market Share de Flow.  
+[@cr-barras-agrupadas]{scale-by="0.9"} In key regions where both brands operated, Flow's market share would grow significantly:   
 
 
-[@cr-barras-comparacion]{scale-by="0.9"} Este sería el impacto de la fusión en el Market Share de Flow si le sumamos el Share de Movistar en las provincias donde comparten cobertura.
+[@cr-barras-comparacion]{scale-by="0.9"} In key regions where both brands operated, Flow's market share would grow significantly: 
 
-[@cr-barras-flow-post]{scale-by="0.9"} Tras la fusión, el Market Share de Flow en dichas provincias se vería así.<br><br> En distritos como CABA (53.9%), Neuquén (46.7%), San Juan (51.2%) y Río Negro (54.8%), la empresa de Telecom pasaría a tener una posición totalmente dominante.
+[@cr-barras-flow-post]{scale-by="0.9"} Post-Merger Market Share by Province: <br><br>• Río Negro (54.8%)<br><br>• CABA (53.9%)<br><br>• Neuquén (46.7%)<br><br>• San Juan (51.2%)
 
 ::::
 
@@ -875,7 +875,7 @@ viewof chart_nacional = Plot.plot({
 ```
 :::
 
-[@cr-nacional-share]{scale-by="0.9"} A nivel nacional, Flow lidera el mercado con un 34.7% de participación, seguido por Claro con 15.1%. Movistar, que será adquirida por Flow, actualmente tiene un 12.9% del mercado.
+[@cr-nacional-share]{scale-by="0.9"} Nationally, Flow leads the market with a 34.7% share, followed by Claro at 15.1%. Movistar, Flow's acquisition target, currently holds 12.9% of the market.
 
 :::{#cr-nacional-share-post}
 ```{ojs}
@@ -930,7 +930,7 @@ viewof chart_nacional_post = Plot.plot({
 ```
 :::
 
-[@cr-nacional-share-post]{scale-by="0.9"} Tras la fusión, Flow alcanzará un 47.5% del mercado nacional, lo que lo convertirá en el líder indiscutido del sector. El siguiente competidor más cercano mantendrá un 15.1% de participación.
+[@cr-nacional-share-post]{scale-by="0.9"} After the merger: <br><br> Flow would command 47.5% of the national market, becoming the undisputed leader. The next closest competitor, Claro, remains at 15.1%. 
 
 ::::
 
@@ -1044,7 +1044,7 @@ md`<div style="padding-left: 110px; padding-top: 30px; font-weight: bold;">Movis
 ```
 :::
 
-@cr-headline_reflexiones <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Será beneficiosa la fusión para los abonados? ¿Podrán acceder a una mejor calidad del servicio a menor precio?<br><br></span><span style="font-size: 20pt; text-align: center; color: #FFFFFF;">• Flow ofrece solo 3 planes desde 100MB hasta 1000MB con precios entre $43.000 y $81.000<br><br> • Movistar tiene una oferta más diversificada con velocidades desde 100MB hasta 1000MB y precios más bajos, desde $31.390 hasta $46.090.</span>
+@cr-headline_reflexiones <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">Will the Merger Benefit Subscribers? <br><br></span>
 
 ::::
 
@@ -1096,7 +1096,7 @@ Plot.plot({
 ```
 :::
 
-@cr-costo-mb <span style="font-size: 20pt; text-align: center; color: #FFFFFF;">Según lo presentado, los usuarios de Flow pagan $228 por MB, mientras que los usuarios de Movistar acostumbran a pagar valores menores, de $125 por MB. La adquisición de Movistar por parte de Flow podría acarrear un incremento de precios a los usuarios de Movistar. <br><br>En este contexto, queda por evaluar si a futuro se produce un cambio de proveedor de aquellos que se vean perjudicados.</span>
+@cr-costo-mb <span style="font-size: 20pt; text-align: center; color: #FFFFFF;">The acquisition may lead to higher prices for former Movistar subscribers. Whether customers will remain or migrate to another provider will depend on how pricing and service quality evolve post-merger. </span>
 
 ::::
 
@@ -1114,6 +1114,6 @@ Plot.plot({
  <div style="text-align: center; color: #171A1F; font-weight: bold; padding-top: 10px;">Pablo Cerchia</div>
 :::
 
-@cr-headline_fotocarnet <span style="font-size: 20pt; font-weight: bold; text-align: center; color: #FFFFFF;">ANÁLISIS REALIZADO POR<br></span><span style="font-size: 49pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET</span>
+@cr-headline_fotocarnet <span style="font-size: 20pt; font-weight: bold; text-align: center; color: #FFFFFF;">ANALYSIS CONDUCTED BY<br></span><span style="font-size: 49pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET</span>
 
 ::::
