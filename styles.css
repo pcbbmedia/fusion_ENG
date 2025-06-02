@@ -1,0 +1,21 @@
+/* css styles */ 
+.plot .tick text {
+  font-size: 30px;
+}
+
+body, main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Oculta cualquier navbar de Quarto/Bootstrap */
+.navbar, .quarto-navbar, .navbar-expand-lg, .navbar-light, .bg-primary {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

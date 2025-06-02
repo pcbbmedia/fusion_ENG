@@ -1,0 +1,1119 @@
+---
+title: "FUSIÓN TELECOM Y TELEFÓNICA"
+embed-resources: true
+format:
+  closeread-html:
+    remove-header-space: true
+    cr-style:
+      section-background-color: white
+      narrative-background-color-sidebar: "#171a1f"
+      narrative-text-color-sidebar: "#FFFFFF"
+      narrative-background-color-overlay: "rgba(0,0,0,0.6)"
+      narrative-sidebar-width: 2fr
+      narrative-font-size: 24pt
+      narrative-font-size-sidebar: 36pt
+      narrative-font-size-overlay: 36pt
+      narrative-overlay-max-width: 800px
+execute:
+  warning: false
+---
+
+::::{.cr-section}
+
+:::{#cr-headline2}
+ ![](FABRICLOGO.png){.scale-to-fill}
+:::
+
+@cr-headline2 <span style="font-size: 48pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET REPORT<br></span> <span style="font-size: 24pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">La fusión de Telecom y Telefónica</span> 
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-headline}
+ ![](logo_fusionado2.png){.scale-to-fill}
+:::
+
+@cr-headline <span style="font-size: 38pt; font-weight: bold; text-align: center; color: #FFFFFF; ">¿Cómo impacta al mercado de Internet?</span> 
+
+
+@cr-headline La empresa del Grupo Clarín invirtió US$ 1.245 millones para quedarse con Telefónica Argentina. <br><br> La operación marca un hito histórico en el mercado argentino de telecomunicaciones. 
+
+:::{#cr-market-plot}
+```{ojs}
+//| label: market-share-plot-ojs
+//| echo: false
+//| fig.width: 30
+//| fig.height: 12
+
+market_data_ojs_raw = await FileAttachment("nacional.csv").csv({ typed: false });
+market_data_ojs = market_data_ojs_raw.map(d => ({
+  ...d,
+  "Share pre fusion": parseFloat(String(d["Share pre fusion"]).replace('%', '').trim())
+}));
+
+viewof chart = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50, 
+  marginTop: 0,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(market_data_ojs, {
+      y: "Grupo ME",
+      x: "Share pre fusion",
+      fill: "#7600BF",
+    }),
+    Plot.text(market_data_ojs, {
+      x: "Share pre fusion",
+      y: "Grupo ME",
+      text: d => d["Share pre fusion"].toFixed(1) + "%",
+      dx: 4,
+      fill: "black",
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: " ",
+    tickLabelAnchor: "start",
+    domain: market_data_ojs.sort((a, b) => b["Share pre fusion"] - a["Share pre fusion"]).map(d => d["Grupo ME"]),
+    padding: 0.3
+  },
+  x: {
+    label: "Share (%)",
+    grid: true
+  }
+})
+```
+:::
+
+::::
+
+::::{.cr-section}
+
+Así se distribuye el Market Share en Argentina previo a la adquisición. <br><br>Flow (Telecom) y Movistar (Telefónica) son dos de los principales players dentro del mercado. @cr-market-plot-highlighted
+
+:::{#cr-market-plot-highlighted}
+```{ojs}
+//| label: market-share-plot-highlighted
+//| echo: false
+//| fig.width: 30
+//| fig.height: 12
+
+// market_data_ojs is assumed to be available from the previous OJS cell
+
+viewof chart_highlighted = Plot.plot({
+  title: "", // Added a slightly different title
+  marginLeft: 150,
+  marginRight: 50, 
+  marginTop: 0,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(market_data_ojs, {
+      y: "Grupo ME",
+      x: "Share pre fusion",
+      fill: d => (d["Grupo ME"] === "Flow" || d["Grupo ME"] === "Movistar") ? "#7600BF" : "#7F8995" // Conditional fill
+    }),
+    Plot.text(market_data_ojs, {
+      x: "Share pre fusion",
+      y: "Grupo ME",
+      text: d => d["Share pre fusion"].toFixed(1) + "%",
+      dx: 4, 
+      fill: d => (d["Grupo ME"] === "Flow" || d["Grupo ME"] === "Movistar") ? "#333333" : "#555555", // Slightly different text fill for highlighted
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: " ",
+    tickLabelAnchor: "start",
+    domain: market_data_ojs.sort((a, b) => b["Share pre fusion"] - a["Share pre fusion"]).map(d => d["Grupo ME"]),
+    padding: 0.3
+  },
+  x: {
+    label: "Share (%)",
+    grid: true
+  }
+})
+```
+:::
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-mapa-base-presencia}
+```{ojs}
+//| echo: false
+
+Plot = require("@observablehq/plot")
+d3 = require("d3@7")
+
+mapa_geojson_data = await d3.json("provincias_v2.geojson");
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 2200,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: "#E2E7EC",
+      stroke: "white",
+      strokeWidth: 0.1
+    })
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+:::{#cr-mapa-activo}
+```{ojs}
+//| echo: false
+
+provincesToHighlight = [
+  "BUENOS AIRES", "CIUDAD AUTONOMA DE BUENOS AIRES", "CHUBUT", "CORDOBA",
+  "ENTRE RIOS", "FORMOSA", "LA PAMPA", "MENDOZA", "MISIONES",
+  "NEUQUEN", "RIO NEGRO", "SALTA", "SAN JUAN", "TIERRA DEL FUEGO"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 2200,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: "#E2E7EC",
+      stroke: "white",
+      strokeWidth: 0.1
+    }),
+    Plot.geo(
+      {
+        type: "FeatureCollection",
+        features: mapa_geojson_data.features.filter(
+          d => provincesToHighlight.includes(d.properties.id)
+        )
+      },
+      {
+        fill: "#F34073",
+        fillOpacity: 0.8,
+        stroke: "black",
+        strokeWidth: 0.1
+      }
+    )
+  ],
+  width: 1600,
+  height: 1400,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+:::{#cr-barras-provincias}
+```{ojs}
+//| echo: false
+//| fig.width: 30
+//| fig.height: 12
+
+provincia_data = await FileAttachment("PROVINCIA_MOVISTAR.csv").csv({ typed: false });
+
+// Convertir los valores a números y ordenar los datos
+provincia_data_processed = provincia_data
+  .filter(d => d.Provincia) // Filter out empty rows
+  .map(d => ({
+    Provincia: d.Provincia === "CIUDAD AUTONOMA DE BUENOS AIRES" ? "CABA" : d.Provincia,
+    "Abonados pre fusion": parseInt(d["Abonados pre fusion"].replace(/,/g, '')) // Remove commas and convert to number
+  }))
+  .sort((a, b) => b["Abonados pre fusion"] - a["Abonados pre fusion"]);
+
+// Provincias a destacar
+provinciasDestacadas = [
+  "BUENOS AIRES",
+  "CABA",
+  "MENDOZA"
+];
+
+viewof chart_provincias = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(provincia_data_processed, {
+      y: "Provincia",
+      x: "Abonados pre fusion",
+      fill: d => provinciasDestacadas.includes(d.Provincia) ? "#F34073" : "#B8C1CC",
+      fillOpacity: d => provinciasDestacadas.includes(d.Provincia) ? 0.9 : 0.6
+    }),
+    Plot.text(provincia_data_processed, {
+      x: "Abonados pre fusion",
+      y: "Provincia",
+      text: d => d["Abonados pre fusion"].toString(),
+      dx: 4,
+      fill: d => provinciasDestacadas.includes(d.Provincia) ? "#333333" : "#555555",
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: " ",
+    tickLabelAnchor: "start",
+    domain: provincia_data_processed.map(d => d.Provincia),
+    padding: 0.3
+  },
+  x: {
+    label: "Abonados",
+    grid: true
+  }
+})
+```
+:::
+
+:::{#cr-mapa-concentracion}
+```{ojs}
+//| echo: false
+
+concentracionProvincias = [
+  "BUENOS AIRES",
+  "CIUDAD AUTONOMA DE BUENOS AIRES",
+  "MENDOZA"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 2200,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: "#E2E7EC",
+      stroke: "white",
+      strokeWidth: 0.1
+    }),
+    Plot.geo(
+      {
+        type: "FeatureCollection",
+        features: mapa_geojson_data.features.filter(
+          d => concentracionProvincias.includes(d.properties.id)
+        )
+      },
+      {
+        fill: "#F34073",
+        fillOpacity: 0.9,
+        stroke: "black",
+        strokeWidth: 0.15
+      }
+    )
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+[@cr-mapa-activo]{scale-by="7.4"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Cómo es la presencia de Movistar en el mercado? <br><br></span>Según el relevamiento de Fabric, Movistar tiene cobertura en 14 provincias.
+
+[@cr-mapa-concentracion]{scale-by="16.8"} El 81% de sus abonados se concentran en CABA, Buenos Aires y Mendoza.
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-mapa-patagonia}
+```{ojs}
+//| echo: false
+
+// Shared definition for both visualizations
+provinciasPatagonia = [
+  "RIO NEGRO",
+  "CHUBUT",
+  "TIERRA DEL FUEGO",
+  "NEUQUEN"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 3500,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: "#E2E7EC",
+      stroke: "white",
+      strokeWidth: 0.1
+    }),
+    Plot.geo(
+      {
+        type: "FeatureCollection",
+        features: mapa_geojson_data.features.filter(
+          d => provinciasPatagonia.includes(d.properties.id)
+        )
+      },
+      {
+        fill: "#F34073",
+        fillOpacity: 0.8,
+        stroke: "black",
+        strokeWidth: 0.15
+      }
+    )
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+[@cr-mapa-patagonia]{scale-by="7.4"} Mientras que las provincias donde Movistar tiene una posición más dominante en el market share se encuentran en la región patagónica.
+
+[@cr-mapa-patagonia]{pan-to="0%,-45%" scale-by="16.4"} Estas son Río Negro (45.6%), Chubut (43.6%), Tierra del Fuego (37.2%) y Neuquén (36.2%).
+
+:::{#cr-barras-share}
+```{ojs}
+//| echo: false
+
+provincia_share_data = await FileAttachment("PROVINCIA_MOVISTAR.csv").csv({ typed: false });
+
+// Convertir los valores a números y ordenar los datos
+provincia_share_processed = provincia_share_data
+  .filter(d => d.Provincia) // Filter out empty rows
+  .map(d => ({
+    Provincia: d.Provincia === "CIUDAD AUTONOMA DE BUENOS AIRES" ? "CABA" : d.Provincia,
+    "Share pre fusion": parseFloat(d["Share pre fusion"].replace('%', ''))
+  }))
+  .sort((a, b) => b["Share pre fusion"] - a["Share pre fusion"]);
+
+viewof chart_share = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(provincia_share_processed, {
+      y: "Provincia",
+      x: "Share pre fusion",
+      fill: d => provinciasPatagonia.includes(d.Provincia) ? "#F34073" : "#B8C1CC",
+      fillOpacity: d => provinciasPatagonia.includes(d.Provincia) ? 0.9 : 0.6
+    }),
+    Plot.text(provincia_share_processed, {
+      x: "Share pre fusion",
+      y: "Provincia",
+      text: d => d["Share pre fusion"].toFixed(1) + "%",
+      dx: 4,
+      fill: d => provinciasPatagonia.includes(d.Provincia) ? "#333333" : "#555555",
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: " ",
+    tickLabelAnchor: "start",
+    domain: provincia_share_processed.map(d => d.Provincia),
+    padding: 0.3
+  },
+  x: {
+    label: "Market Share (%)",
+    grid: true
+  }
+})
+```
+:::
+
+@cr-barras-share En estas provincias del sur, Movistar alcanza sus mayores niveles de participación de mercado, llegando al 45.6% en Río Negro y 43.6% en Chubut.
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-logoflow}
+![](flow_logo.png){.scale-to-fill}
+:::
+
+
+:::{#cr-mapa-flow}
+```{ojs}
+//| echo: false
+
+// Shared definition for both visualizations
+provinciasFlow = [
+"BUENOS AIRES",
+"CIUDAD AUTONOMA DE BUENOS AIRES",
+"CATAMARCA",
+"CHACO",
+"CHUBUT",
+"CORDOBA",
+"CORRIENTES",
+"ENTRE RIOS",
+"FORMOSA",
+"JUJUY",
+"LA PAMPA",
+"LA RIOJA",
+"MENDOZA",
+"MISIONES",
+"NEUQUEN",
+"RIO NEGRO",
+"SALTA",
+"SAN JUAN",
+"SAN LUIS",
+"SANTA FE",
+"SANTIAGO DEL ESTERO",
+"TIERRA DEL FUEGO",
+"TUCUMAN"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 3500,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: "#E2E7EC",
+      stroke: "white",
+      strokeWidth: 0.1
+    }),
+    Plot.geo(
+      {
+        type: "FeatureCollection",
+        features: mapa_geojson_data.features.filter(
+          d => provinciasFlow.includes(d.properties.id)
+        )
+      },
+      {
+        fill: "#9800A6",
+        fillOpacity: 0.8,
+        stroke: "black",
+        strokeWidth: 0.15
+      }
+    )
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+:::{#cr-mapa-fusion}
+```{ojs}
+//| echo: false
+
+// Define the provinces for each color group
+provinciasVioleta = [
+  "BUENOS AIRES",
+  "CHACO",
+  "CIUDAD AUTONOMA DE BUENOS AIRES",
+  "CORDOBA",
+  "CORRIENTES",
+  "ENTRE RIOS",
+  "FORMOSA",
+  "LA RIOJA",
+  "MISIONES",
+  "SALTA",
+  "SANTA FE",
+  "SANTIAGO DEL ESTERO",
+  "TUCUMAN"
+];
+
+provinciasVerdes = [
+  "CATAMARCA",
+  "CHUBUT",
+  "JUJUY",
+  "LA PAMPA",
+  "MENDOZA",
+  "NEUQUEN",
+  "RIO NEGRO",
+  "SAN JUAN",
+  "SAN LUIS",
+  "TIERRA DEL FUEGO"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 2200,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: d => {
+        if (provinciasVioleta.includes(d.properties.id)) return "#FFAC26";
+        if (provinciasVerdes.includes(d.properties.id)) return "#9800A6";
+        return "#E2E7EC";  // For SANTA CRUZ and any other provinces
+      },
+      stroke: "white",
+      strokeWidth: 0.1
+    })
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+[@cr-logoflow]{scale-by="0.7"} <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Cómo quedaría reconfigurada la presencia de Flow en el mercado?<br><br></span>Actualmente Flow es el líder en el mercado de Internet en Argentina con 3.9 millones de abonados y 34.68% de Market Share.
+
+[@cr-mapa-flow]{scale-by="7.4"} Tiene presencia en 23 provincias.
+
+[@cr-mapa-fusion]{scale-by="7.4"} Hoy en día Flow es <span style="color:#FFAC26">**LÍDER DE MERCADO**</span> en 13 de esas provincias.
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-mapa-post-fusion}
+```{ojs}
+//| echo: false
+
+// Define the provinces for each color group
+provinciasPostFusion = [
+  "BUENOS AIRES",
+  "CHACO",
+  "CHUBUT",
+  "CIUDAD AUTONOMA DE BUENOS AIRES",
+  "CORDOBA",
+  "CORRIENTES",
+  "ENTRE RIOS",
+  "FORMOSA",
+  "LA RIOJA",
+  "MENDOZA",
+  "MISIONES",
+  "RIO NEGRO",
+  "SALTA",
+  "SAN JUAN",
+  "SANTA FE",
+  "SANTIAGO DEL ESTERO",
+  "TUCUMAN"
+];
+
+provinciasVerdesPostFusion = [
+  "CATAMARCA",
+  "JUJUY",
+  "LA PAMPA",
+  "NEUQUEN",
+  "SAN LUIS",
+  "TIERRA DEL FUEGO",
+  "SANTA CRUZ"
+];
+
+Plot.plot({
+  projection: {
+    type: "mercator",
+    scale: 2200,
+    rotate: [63.5, 38, 0]
+  },
+  marks: [
+    Plot.geo(mapa_geojson_data, {
+      fill: d => {
+        if (provinciasPostFusion.includes(d.properties.id)) return "#FFAC26";
+        if (provinciasVerdesPostFusion.includes(d.properties.id)) return "#9800A6";
+        return "#E2E7EC";  // For SANTA CRUZ and any other provinces
+      },
+      stroke: "white",
+      strokeWidth: 0.1
+    })
+  ],
+  width: 2400,
+  height: 2050,
+  style: {
+    background: "transparent"
+  }
+})
+```
+:::
+
+
+:::{#cr-barras-comparacion}
+```{ojs}
+//| echo: false
+
+comparacion_data = await FileAttachment("comparacion_mov_flow.csv").csv({ typed: false });
+
+// Convertir los valores a números y procesar los datos
+comparacion_processed = comparacion_data
+  .map(d => ({
+    Provincia: d.Provincia,
+    Grupo: d["Grupo ME"],
+    Share: parseFloat(d["Share pre fusion"].replace('%', ''))
+  }))
+  .sort((a, b) => {
+    if (a.Provincia !== b.Provincia) {
+      return b.Share - a.Share;
+    }
+    // Si es la misma provincia, Flow va primero
+    return a.Grupo === "Flow" ? -1 : 1;
+  });
+
+viewof chart_comparacion = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50,
+  marginBottom: 100,
+  height: 700,
+  width: 850,
+  y: {
+    label: "Market Share (%)",
+    grid: true
+  },
+  x: {
+    label: "Provincia",
+    tickRotate: -45,
+    padding: 0.2
+  },
+  marks: [
+    Plot.barY(comparacion_processed, {
+      x: "Provincia",
+      y: "Share",
+      fill: "Grupo",
+      title: d => `${d.Grupo}: ${d.Share.toFixed(1)}%`,
+      dodge: true,
+      order: d => d.Grupo === "Flow" ? 0 : 1  // Asegura que Flow siempre va primero
+    })
+  ],
+  color: {
+    domain: ["Flow", "Movistar"],
+    range: ["#9800A6", "#F34073"],
+    legend: true
+  }
+})
+```
+:::
+
+:::{#cr-barras-agrupadas}
+```{ojs}
+//| echo: false
+
+comparacion_data_agrupado = await FileAttachment("comparacion_mov_flow.csv").csv({ typed: false });
+
+// Convertir los valores a números y procesar los datos
+comparacion_processed_agrupado = comparacion_data_agrupado
+  .map(d => ({
+    Provincia: d.Provincia,
+    Grupo: d["Grupo ME"],
+    Share: parseFloat(d["Share pre fusion"].replace('%', ''))
+  }))
+  .sort((a, b) => b.Share - a.Share);
+
+viewof chart_agrupado = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50,
+  marginBottom: 100,
+  height: 700,
+  width: 850,
+  y: {
+    label: "Market Share (%)",
+    grid: true
+  },
+  x: {
+    label: "Provincia",
+    tickRotate: -45,
+    padding: 0.2
+  },
+  marks: [
+    Plot.barY(comparacion_processed_agrupado, {
+      x: "Provincia",
+      y: "Share",
+      fx: "Grupo",  // <--- esto es lo clave
+      fill: "Grupo",
+      title: d => `${d.Grupo}: ${d.Share.toFixed(1)}%`
+    })
+  ],
+  color: {
+    domain: ["Flow", "Movistar"],
+    range: ["#9800A6", "#F34073"],
+    legend: true
+  }
+})
+```
+:::
+
+:::{#cr-barras-flow-post}
+```{ojs}
+//| echo: false
+
+flow_post_data = await FileAttachment("comparacion_mov_flow.csv").csv({ typed: false });
+
+// Filtrar solo Flow y procesar los datos
+flow_post_processed = flow_post_data
+  .filter(d => d["Grupo ME"] === "Flow")
+  .map(d => ({
+    Provincia: d.Provincia,
+    Share: parseFloat(d["Share post fusion"].replace('%', ''))
+  }))
+  .sort((a, b) => b.Share - a.Share);
+
+viewof chart_flow_post = Plot.plot({
+  title: "",
+  marginLeft: 150,
+  marginRight: 50,
+  marginBottom: 100,
+  height: 700,
+  width: 850,
+  y: {
+    label: "Market Share Post Fusión (%)",
+    grid: true
+  },
+  x: {
+    label: "Provincia",
+    tickRotate: -45,
+    padding: 0.2
+  },
+  marks: [
+    Plot.barY(flow_post_processed, {
+      x: "Provincia",
+      y: "Share",
+      fill: "#9800A6"
+    }),
+    Plot.text(flow_post_processed, {
+      x: "Provincia",
+      y: "Share",
+      text: d => d.Share.toFixed(1) + "%",
+      dy: -8,
+      fontSize: 12
+    })
+  ]
+})
+```
+:::
+
+[@cr-mapa-post-fusion]{scale-by="7.8"} Tras la fusión, Flow pasaría a ser <span style="color:#FFAC26">**LÍDER DE MERCADO**</span> en 17 de esas provincias y tendría cobertura en todas las provincias del país.
+ 
+[@cr-barras-agrupadas]{scale-by="0.9"} Veamos en detalle el impacto de la fusión en el Market Share de Flow.  
+
+
+[@cr-barras-comparacion]{scale-by="0.9"} Este sería el impacto de la fusión en el Market Share de Flow si le sumamos el Share de Movistar en las provincias donde comparten cobertura.
+
+[@cr-barras-flow-post]{scale-by="0.9"} Tras la fusión, el Market Share de Flow en dichas provincias se vería así.<br><br> En distritos como CABA (53.9%), Neuquén (46.7%), San Juan (51.2%) y Río Negro (54.8%), la empresa de Telecom pasaría a tener una posición totalmente dominante.
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-nacional-share}
+```{ojs}
+//| echo: false
+//| fig.width: 30
+//| fig.height: 12
+
+nacional_data = await FileAttachment("nacional.csv").csv({ typed: false });
+
+// Process the data
+nacional_processed = nacional_data
+  .filter(d => d["Grupo ME"]) // Filter out empty rows
+  .map(d => ({
+    Grupo: d["Grupo ME"],
+    Share: parseFloat(d["Share pre fusion"].replace('%', '').trim())
+  }))
+  .sort((a, b) => b.Share - a.Share);
+
+viewof chart_nacional = Plot.plot({
+  title: "Market Share Nacional Pre Fusión",
+  marginLeft: 150,
+  marginRight: 50,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(nacional_processed, {
+      y: "Grupo",
+      x: "Share",
+      fill: d => {
+        if (d.Grupo === "Flow") return "#9800A6";
+        if (d.Grupo === "Movistar") return "#F34073";
+        return "#7F8995";
+      }
+    }),
+    Plot.text(nacional_processed, {
+      x: "Share",
+      y: "Grupo",
+      text: d => d.Share.toFixed(1) + "%",
+      dx: 4,
+      fill: "black",
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: "Grupo",
+    tickLabelAnchor: "start",
+    domain: nacional_processed.map(d => d.Grupo),
+    padding: 0.3
+  },
+  x: {
+    label: "Market Share (%)",
+    grid: true
+  }
+})
+```
+:::
+
+[@cr-nacional-share]{scale-by="0.9"} A nivel nacional, Flow lidera el mercado con un 34.7% de participación, seguido por Claro con 15.1%. Movistar, que será adquirida por Flow, actualmente tiene un 12.9% del mercado.
+
+:::{#cr-nacional-share-post}
+```{ojs}
+//| echo: false
+//| fig.width: 30
+//| fig.height: 12
+
+nacional_data_post = await FileAttachment("nacional.csv").csv({ typed: false });
+
+// Process the data for post fusion
+nacional_processed_post = nacional_data_post
+  .filter(d => d["Grupo ME"] && parseFloat(d["Share post fusion"].replace('%', '').trim()) > 0) // Filter out Movistar and empty rows
+  .map(d => ({
+    Grupo: d["Grupo ME"],
+    Share: parseFloat(d["Share post fusion"].replace('%', '').trim())
+  }))
+  .sort((a, b) => b.Share - a.Share);
+
+viewof chart_nacional_post = Plot.plot({
+  title: "Market Share Nacional Post Fusión",
+  marginLeft: 150,
+  marginRight: 50,
+  height: 700,
+  width: 850,
+  marks: [
+    Plot.barX(nacional_processed_post, {
+      y: "Grupo",
+      x: "Share",
+      fill: d => d.Grupo === "Flow" ? "#9800A6" : "#7F8995"
+    }),
+    Plot.text(nacional_processed_post, {
+      x: "Share",
+      y: "Grupo",
+      text: d => d.Share.toFixed(1) + "%",
+      dx: 4,
+      fill: "black",
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ],
+  y: {
+    label: "Grupo",
+    tickLabelAnchor: "start",
+    domain: nacional_processed_post.map(d => d.Grupo),
+    padding: 0.3
+  },
+  x: {
+    label: "Market Share (%)",
+    grid: true
+  }
+})
+```
+:::
+
+[@cr-nacional-share-post]{scale-by="0.9"} Tras la fusión, Flow alcanzará un 47.5% del mercado nacional, lo que lo convertirá en el líder indiscutido del sector. El siguiente competidor más cercano mantendrá un 15.1% de participación.
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-headline_reflexiones}
+```{ojs}
+//| echo: false
+
+// Load and process the data
+data = {
+  const velocidad_data = await FileAttachment("abonosxvelocidad.csv").csv({ typed: false });
+  
+  // Process Flow data
+  const flow_data = velocidad_data
+    .filter(d => d.Empresa === "Flow")
+    .map(d => ({
+      Velocidad: d.Velocidad,
+      Precio: parseFloat(d.Precio.replace(/[^0-9.]/g, ''))
+    }));
+    
+  // Process Movistar data
+  const movistar_data = velocidad_data
+    .filter(d => d.Empresa === "Movistar")
+    .map(d => ({
+      Velocidad: d.Velocidad,
+      Precio: parseFloat(d.Precio.replace(/[^0-9.]/g, ''))
+    }));
+    
+  return {flow_data, movistar_data};
+}
+
+// Calcular el dominio máximo basado en Flow
+maxDomain = Math.max(...data.flow_data.map(d => d.Precio))
+
+md`<div style="padding-left: 110px;font-weight: bold;">Flow</div>`
+
+// Flow Chart
+{
+  const chart = Plot.plot({
+    marginLeft: 140,
+    marginRight: 150,
+    width: 850,
+    height: 200,
+    x: {
+      grid: true,
+      label: null,
+      domain: [0, maxDomain]
+    },
+    y: {
+      label: null,
+      domain: data.flow_data.map(d => d.Velocidad)
+    },
+    marks: [
+      Plot.barX(data.flow_data, {
+        y: "Velocidad",
+        x: "Precio",
+        fill: "#9800A6",
+        title: d => `${d.Velocidad}: $${d.Precio.toLocaleString('es-AR')}`
+      }),
+      Plot.text(data.flow_data, {
+        y: "Velocidad",
+        x: "Precio",
+        text: d => `$${d.Precio.toLocaleString('es-AR')}`,
+        dx: 30,
+        fill: "black",
+        fontSize: 14
+      })
+    ]
+  });
+  return chart;
+}
+
+md`<div style="padding-left: 110px; padding-top: 30px; font-weight: bold;">Movistar</div>`
+
+// Movistar Chart
+{
+  const chart = Plot.plot({
+    marginLeft: 140,
+    marginRight: 150,
+    width: 850,
+    height: 300,
+    x: {
+      grid: true,
+      label: null,
+      domain: [0, maxDomain]
+    },
+    y: {
+      label: null,
+      domain: data.movistar_data.map(d => d.Velocidad)
+    },
+    marks: [
+      Plot.barX(data.movistar_data, {
+        y: "Velocidad",
+        x: "Precio",
+        fill: "#F34073",
+        title: d => `${d.Velocidad}: $${d.Precio.toLocaleString('es-AR')}`
+      }),
+      Plot.text(data.movistar_data, {
+        y: "Velocidad",
+        x: "Precio",
+        text: d => `$${d.Precio.toLocaleString('es-AR')}`,
+        dx: 30,
+        fill: "black",
+        fontSize: 14
+      })
+    ]
+  });
+  return chart;
+}
+```
+:::
+
+@cr-headline_reflexiones <span style="font-size: 25pt; font-weight: bold; text-align: center; color: #FFFFFF;">¿Será beneficiosa la fusión para los abonados? ¿Podrán acceder a una mejor calidad del servicio a menor precio?<br><br></span><span style="font-size: 20pt; text-align: center; color: #FFFFFF;">• Flow ofrece solo 3 planes desde 100MB hasta 1000MB con precios entre $43.000 y $81.000<br><br> • Movistar tiene una oferta más diversificada con velocidades desde 100MB hasta 1000MB y precios más bajos, desde $31.390 hasta $46.090.</span>
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-costo-mb}
+```{ojs}
+// Datos de costo por MB
+costoMB = [
+  {empresa: "Flow", costo: 228},
+  {empresa: "Movistar", costo: 125}
+]
+
+// Crear gráfico de columnas
+Plot.plot({
+  marginLeft: 140,
+  marginRight: 150,
+  marginBottom: 50,
+  width: 850,
+  height: 400,
+  y: {
+    grid: true,
+    label: "Costo por MB ($)",
+    domain: [0, 250]
+  },
+  x: {
+    label: null,
+    domain: costoMB.map(d => d.empresa),
+    padding: 0.5
+  },
+  marks: [
+    Plot.barY(costoMB, {
+      x: "empresa",
+      y: "costo",
+      fill: d => d.empresa === "Flow" ? "#9800A6" : "#F34073",
+      title: d => `${d.empresa}: $${d.costo}/MB`
+    }),
+    Plot.text(costoMB, {
+      x: "empresa",
+      y: "costo",
+      text: d => `$${d.costo}/MB`,
+      dy: -22,
+      fill: "black",
+      fontSize: 24,
+      fontWeight: "bold"
+    })
+  ]
+})
+```
+:::
+
+@cr-costo-mb <span style="font-size: 20pt; text-align: center; color: #FFFFFF;">Según lo presentado, los usuarios de Flow pagan $228 por MB, mientras que los usuarios de Movistar acostumbran a pagar valores menores, de $125 por MB. La adquisición de Movistar por parte de Flow podría acarrear un incremento de precios a los usuarios de Movistar. <br><br>En este contexto, queda por evaluar si a futuro se produce un cambio de proveedor de aquellos que se vean perjudicados.</span>
+
+::::
+
+::::{.cr-section}
+
+:::{#cr-headline_fotocarnet}
+
+ ![](jime_foto.png){width="120px"}
+ <div style="text-align: center; color: #171A1F; font-weight: bold; padding-top: 10px;">Jimena Municoy<br><br><br></div>
+
+ ![](thelma_foto.png){width="120px"}
+ <div style="text-align: center; color: #171A1F; font-weight: bold; padding-top: 10px;">Thelma Fratarelli<br><br><br></div>
+
+  ![](pablo_foto.png){width="120px"}
+ <div style="text-align: center; color: #171A1F; font-weight: bold; padding-top: 10px;">Pablo Cerchia</div>
+:::
+
+@cr-headline_fotocarnet <span style="font-size: 20pt; font-weight: bold; text-align: center; color: #FFFFFF;">ANÁLISIS REALIZADO POR<br></span><span style="font-size: 49pt; font-weight: bold; text-align: center; color: #FFFFFF; text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">AUDINET</span>
+
+::::

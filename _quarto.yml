@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+  resources:
+    - "*.geojson"
+    - "*.csv"
+    - "*.jpg"
+    - "*.png"
+
+website:
+  title: "Fusión Telecom y Telefónica"
+  repo-url: https://github.com/pablocerchia/fusionv2
+  repo-actions: [source]
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true 

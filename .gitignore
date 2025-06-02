@@ -1,0 +1,8 @@
+/.quarto/
+/_site/
+/.jupyter/
+/.ipynb_checkpoints/
+*.html
+!docs/*.html
+~$*
+.DS_Store
