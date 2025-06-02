@@ -684,7 +684,7 @@ viewof chart_comparacion = Plot.plot({
     grid: true
   },
   x: {
-    label: "Provincia",
+    label: "Province",
     tickRotate: -45,
     padding: 0.2
   },
@@ -734,7 +734,7 @@ viewof chart_agrupado = Plot.plot({
     grid: true
   },
   x: {
-    label: "Provincia",
+    label: "Province",
     tickRotate: -45,
     padding: 0.2
   },
@@ -783,7 +783,7 @@ viewof chart_flow_post = Plot.plot({
     grid: true
   },
   x: {
-    label: "Provincia",
+    label: "Province",
     tickRotate: -45,
     padding: 0.2
   },
@@ -862,7 +862,7 @@ viewof chart_nacional = Plot.plot({
     Plot.ruleX([0])
   ],
   y: {
-    label: "Grupo",
+    label: "Group",
     tickLabelAnchor: "start",
     domain: nacional_processed.map(d => d.Grupo),
     padding: 0.3
@@ -917,7 +917,7 @@ viewof chart_nacional_post = Plot.plot({
     Plot.ruleX([0])
   ],
   y: {
-    label: "Grupo",
+    label: "Group",
     tickLabelAnchor: "start",
     domain: nacional_processed_post.map(d => d.Grupo),
     padding: 0.3
@@ -966,7 +966,7 @@ data = {
 // Calcular el dominio máximo basado en Flow
 maxDomain = Math.max(...data.flow_data.map(d => d.Precio))
 
-md`<div style="padding-left: 110px;font-weight: bold;">Flow</div>`
+md`<div style="padding-left: 110px;font-weight: bold;">Flow’s Pricing & Speeds</div>`
 
 // Flow Chart
 {
@@ -1004,7 +1004,7 @@ md`<div style="padding-left: 110px;font-weight: bold;">Flow</div>`
   return chart;
 }
 
-md`<div style="padding-left: 110px; padding-top: 30px; font-weight: bold;">Movistar</div>`
+md`<div style="padding-left: 110px; padding-top: 30px; font-weight: bold;">Movistar’s Pricing & Speeds</div>`
 
 // Movistar Chart
 {
