@@ -11,8 +11,7 @@ project:
 
 website:
   title: "Fusión Telecom y Telefónica"
-  repo-url: https://github.com/pablocerchia/fusionv2
-  repo-actions: [source]
+  repo-url: https://github.com/pcbbmedia/fusion_ESP
 
 format:
   html:
